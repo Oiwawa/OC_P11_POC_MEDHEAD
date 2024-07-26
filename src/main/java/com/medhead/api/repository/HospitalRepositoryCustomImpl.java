@@ -22,14 +22,14 @@ public class HospitalRepositoryCustomImpl implements HospitalRepositoryCustom {
 
     @Override
     public List<Hospital> findBySpecialities(String spec) {
-        TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.specialities LIKE :spec", Hospital.class);
+        TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.spec LIKE :spec", Hospital.class);
         query.setParameter("spec", "%" + spec + "%");
         return query.getResultList();
     }
 
     @Override
     public List<Hospital> findByAvailableBedsAndBySpecialities(String spec) {
-        TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.available_beds > 0 AND h.specialities LIKE :spec", Hospital.class);
+        TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.available_beds > 0 AND h.spec LIKE :spec", Hospital.class);
         query.setParameter("spec", "%" + spec + "%");
         return query.getResultList();
     }

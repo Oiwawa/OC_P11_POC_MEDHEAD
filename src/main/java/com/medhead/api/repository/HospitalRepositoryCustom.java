@@ -11,6 +11,8 @@ public interface HospitalRepositoryCustom {
 
 //    TODO utiliser ce format @Query ou dans le custom impl ?
 //    List<Hospital> findBySpecialities(String spec);
-    @Query(nativeQuery = true, value="SELECT * FROM hospital WHERE specialities LIKE ':spec'")
+    @Query(nativeQuery = true, value="SELECT * FROM hospital WHERE spec LIKE ':spec'")
     List<Hospital> findBySpecialities(@Param("spec") String spec);
+
+    List<Hospital> findByAvailableBedsAndBySpecialities(String spec);
 }
