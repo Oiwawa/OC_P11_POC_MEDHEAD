@@ -37,6 +37,12 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
    mvn test
    ```
    
+5. Lancer la base de données h2
+ - Lancer l'application
+ - Lancer le script data.sql
+ - Accéder à "http://localhost:9090/h2-console"
+ - Première connexion : Tester la connection ([Voir la documentation H2 ](https://www.h2database.com/html/main.html) en cas de problème)
+ - Se connecter
 
 
 ## Configuration
