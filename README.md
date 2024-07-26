@@ -12,8 +12,8 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
 
 1. Clonez le dépôt du projet :
    ```bash
-   git clone 
-   cd 
+   git clone https://github.com/Oiwawa/OC_P11_POC_MEDHEAD.git
+   cd OC_P11_POC_MEDHEAD
    ``` 
 
 2. Build le projet avec Maven
@@ -28,7 +28,7 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
    ```bash
    mvn spring-boot:run
    ```
-   Vous devriez voir l'application démarrer dans la console. Par défaut, elle sera accessible à l'adresse suivante : http://localhost:8080
+   Vous devriez voir l'application démarrer dans la console. Par défaut, elle sera accessible à l'adresse suivante : http://localhost:9090
 
 
 4. Tests
@@ -43,3 +43,4 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
 - SDK 17
 - Maven
 - Database: h2
+- Port 9090
