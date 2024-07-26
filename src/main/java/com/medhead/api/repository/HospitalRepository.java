@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HospitalRepository extends CrudRepository<Hospital, Integer> {
+public interface HospitalRepository extends CrudRepository<Hospital, Integer>, HospitalRepositoryCustom {
 
-
+    //TODO voir si je laisse ça ici ou si je le met dans le custom
+    @Query(nativeQuery = true, value="SELECT * FROM hospital WHERE specialities LIKE ':spe'")
+    List<Hospital> findBySpecialities(@Param("spec") String spec);
 }

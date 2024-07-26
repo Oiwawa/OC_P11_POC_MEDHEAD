@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -22,6 +23,15 @@ public class HospitalService {
 
     public Iterable<Hospital> getAllHospital() {
         return hospitalRepository.findAll();
+    }
+
+//TODO regarder pour test les collections à la place de List
+    public List<Hospital> findByAvailableBeds() {
+        return hospitalRepository.findByAvailableBeds();
+    }
+
+    public List<Hospital> findBySpecialities(String spec) {
+        return hospitalRepository.findBySpecialities(spec);
     }
 
 }

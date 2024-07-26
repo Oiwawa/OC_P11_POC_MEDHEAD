@@ -1,14 +1,17 @@
 package com.medhead.api.controller;
 
 import com.medhead.api.exceptions.HospitalNotFoundException;
+import com.medhead.api.exceptions.MissingParametersException;
 import com.medhead.api.model.Hospital;
 import com.medhead.api.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -40,6 +43,31 @@ public class HospitalController {
             return hospital;
         } else {
             throw new HospitalNotFoundException("No hospital found in the database with ID " + id);
+        }
+    }
+
+    @RequestMapping("/speciality")
+    public HttpEntity<String> noSpecialityEntered() throws MissingParametersException {
+        throw new MissingParametersException("Warning: missing the speciality parameter");
+    }
+
+    @GetMapping("/speciality/{spec}")
+    public Iterable<Hospital> getAllBySpeciality(@PathVariable("spec") final String speciality) throws HospitalNotFoundException {
+        ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findBySpecialities(speciality);
+        if (!hospitals.isEmpty()) {
+            return hospitals;
+        } else {
+            throw new HospitalNotFoundException("No hospitals found in the database with speciality " + speciality);
+        }
+    }
+
+    @GetMapping("/available")
+    public Iterable<Hospital> getAllavailableBedsHospitals() throws HospitalNotFoundException {
+        Iterable<Hospital> hospitals = hospitalService.findByAvailableBeds();
+        if (hospitals != null) {
+            return hospitals; //TODO modifier pour utiliser du json?
+        } else {
+            throw new HospitalNotFoundException("No hospitals with available beds found in the database");
         }
     }
 }
