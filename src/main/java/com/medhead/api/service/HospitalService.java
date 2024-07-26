@@ -30,8 +30,8 @@ public class HospitalService {
         return hospitalRepository.findByAvailableBeds();
     }
 
-    public List<Hospital> findBySpecialities(String specialty) {
-        return hospitalRepository.findBySpecialities(specialty);
+    public List<Hospital> findBySpecialities(String speciality) {
+        return hospitalRepository.findBySpecialities(speciality);
     }
 
 }

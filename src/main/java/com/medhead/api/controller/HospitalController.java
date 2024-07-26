@@ -51,8 +51,8 @@ public class HospitalController {
         throw new MissingParametersException("Warning: missing the speciality parameter");
     }
 
-    @GetMapping("/speciality/{specialty}")
-    public Iterable<Hospital> getAllBySpeciality(@PathVariable("specialty") final String speciality) throws HospitalNotFoundException {
+    @GetMapping("/speciality/{speciality}")
+    public Iterable<Hospital> getAllBySpeciality(@PathVariable("speciality") final String speciality) throws HospitalNotFoundException {
         ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findBySpecialities(speciality);
         if (!hospitals.isEmpty()) {
             return hospitals;
