@@ -12,6 +12,6 @@ import java.util.List;
 public interface HospitalRepository extends CrudRepository<Hospital, Integer>, HospitalRepositoryCustom {
 
     //TODO voir si je laisse ça ici ou si je le met dans le custom
-    @Query(nativeQuery = true, value="SELECT * FROM hospital WHERE spec LIKE ':spe'")
-    List<Hospital> findBySpecialities(@Param("spec") String spec);
+    @Query(nativeQuery = true, value="SELECT * FROM hospital WHERE specialty LIKE ':spe'")
+    List<Hospital> findBySpecialities(@Param("specialty") String specialty);
 }
