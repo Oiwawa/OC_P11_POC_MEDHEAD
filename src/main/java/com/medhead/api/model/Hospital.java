@@ -19,7 +19,7 @@ public class Hospital {
     private float latitude;
 
     @Column(name="speciality")
-    private String specialities;
+    private String speciality;
 
     private String address;
 

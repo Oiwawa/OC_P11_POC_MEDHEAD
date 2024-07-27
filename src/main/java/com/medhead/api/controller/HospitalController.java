@@ -70,4 +70,14 @@ public class HospitalController {
             throw new HospitalNotFoundException("No hospitals with available beds found in the database");
         }
     }
+
+    @GetMapping("/available/speciality/{speciality}")
+    public Iterable<Hospital> getAllAvailableBySpeciality(@PathVariable("speciality") final String speciality) throws HospitalNotFoundException {
+        ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findByAvailableBedsAndBySpecialities(speciality);
+        if (!hospitals.isEmpty()) {
+            return hospitals;
+        } else {
+            throw new HospitalNotFoundException("No hospitals with available beds found in the database with speciality " + speciality);
+        }
+    }
 }
