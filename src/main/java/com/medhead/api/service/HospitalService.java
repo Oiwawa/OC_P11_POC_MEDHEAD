@@ -6,12 +6,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 @Service
@@ -34,17 +30,42 @@ public class HospitalService {
         return new HashSet<>(specialitiesList);
     }
 
-//TODO regarder pour test les collections à la place de List
-    public List<Hospital> findByAvailableBeds() {
-        return hospitalRepository.findByAvailableBeds();
+    public List<Hospital> searchHospitals(String speciality, Boolean availableBeds, Float latInit, Float longInit, Integer distance) {
+        List<Hospital> hospitals;
+
+        if (availableBeds != null && availableBeds) {
+            hospitals = (speciality != null) ?
+                    hospitalRepository.findByAvailableBedsAndBySpecialities(speciality) :
+                    hospitalRepository.findByAvailableBeds();
+        } else {
+            hospitals = (speciality != null) ?
+                    hospitalRepository.findBySpecialities(speciality) :
+                    (List<Hospital>) hospitalRepository.findAll();
+        }
+
+        if (latInit != null && longInit != null && distance != null) {
+            hospitals = filterHospitalsInRange(hospitals, latInit, longInit, distance);
+        }
+
+        return hospitals;
     }
 
-    public List<Hospital> findBySpecialities(String speciality) {
-        return hospitalRepository.findBySpecialities(speciality);
+    private List<Hospital> filterHospitalsInRange(List<Hospital> hospitals, float latInit, float longInit, int distance) {
+        return hospitals.stream()
+                .filter(h -> calculateDistance(latInit, longInit, h.getLatitude(), h.getLongitude()) <= distance)
+                .collect(Collectors.toList());
     }
 
-    public List<Hospital> findByAvailableBedsAndBySpecialities(String speciality) {
-        return hospitalRepository.findByAvailableBedsAndBySpecialities(speciality);
+    private double calculateDistance(float lat1, float lon1, float lat2, float lon2) {
+        double earthRadius = 6371; // km
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return earthRadius * c;
     }
+
 
 }

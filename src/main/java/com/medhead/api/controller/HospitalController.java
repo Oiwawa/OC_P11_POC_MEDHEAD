@@ -6,12 +6,9 @@ import com.medhead.api.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -53,33 +50,20 @@ public class HospitalController {
         return new ResponseEntity<>(specialities, HttpStatus.OK);
     }
 
-    @GetMapping("/speciality/{speciality}")
-    public Iterable<Hospital> getAllBySpeciality(@PathVariable("speciality") final String speciality) throws HospitalNotFoundException {
-        ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findBySpecialities(speciality);
+    @GetMapping("/search")
+    public Iterable<Hospital> searchHospitals(
+            @RequestParam(value = "speciality", required = false) String speciality,
+            @RequestParam(value = "availableBeds", required = false) Boolean availableBeds,
+            @RequestParam(value = "latInit", required = false) Float latInit,
+            @RequestParam(value = "longInit", required = false) Float longInit,
+            @RequestParam(value = "distance", required = false) Integer distance) throws HospitalNotFoundException {
+
+        List<Hospital> hospitals = hospitalService.searchHospitals(speciality, availableBeds, latInit, longInit, distance);
+
         if (!hospitals.isEmpty()) {
             return hospitals;
         } else {
-            throw new HospitalNotFoundException("No hospitals found in the database with speciality " + speciality);
-        }
-    }
-
-    @GetMapping("/available")
-    public Iterable<Hospital> getAllavailableBedsHospitals() throws HospitalNotFoundException {
-        Iterable<Hospital> hospitals = hospitalService.findByAvailableBeds();
-        if (hospitals != null) {
-            return hospitals; //TODO modifier pour utiliser du json?
-        } else {
-            throw new HospitalNotFoundException("No hospitals with available beds found in the database");
-        }
-    }
-
-    @GetMapping("/available/speciality/{speciality}")
-    public Iterable<Hospital> getAllAvailableBySpeciality(@PathVariable("speciality") final String speciality) throws HospitalNotFoundException {
-        ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findByAvailableBedsAndBySpecialities(speciality);
-        if (!hospitals.isEmpty()) {
-            return hospitals;
-        } else {
-            throw new HospitalNotFoundException("No hospitals with available beds found in the database with speciality " + speciality);
+            throw new HospitalNotFoundException("No hospitals found with the given parameters");
         }
     }
 }
