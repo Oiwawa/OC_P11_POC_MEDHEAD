@@ -30,6 +30,15 @@ public class HospitalService {
         return new HashSet<>(specialitiesList);
     }
 
+    public List<Hospital> findByAvailableBeds() {
+        return hospitalRepository.findByAvailableBeds();
+    }
+
+    public List<Hospital> findBySpeciality(String speciality) {
+        return hospitalRepository.findBySpeciality(speciality);
+    }
+
+
     public List<Hospital> searchHospitals(String speciality, Boolean availableBeds, Float latInit, Float longInit, Integer distance) {
         List<Hospital> hospitals;
 
@@ -39,7 +48,7 @@ public class HospitalService {
                     hospitalRepository.findByAvailableBeds();
         } else {
             hospitals = (speciality != null) ?
-                    hospitalRepository.findBySpecialities(speciality) :
+                    hospitalRepository.findBySpeciality(speciality) :
                     (List<Hospital>) hospitalRepository.findAll();
         }
 
@@ -66,6 +75,5 @@ public class HospitalService {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return earthRadius * c;
     }
-
 
 }

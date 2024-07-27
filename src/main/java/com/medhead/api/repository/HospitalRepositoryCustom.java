@@ -8,6 +8,6 @@ public interface HospitalRepositoryCustom {
 
     List<String> findAllSpecialities();
     List<Hospital> findByAvailableBeds();
-    List<Hospital> findBySpecialities(String speciality);
+    List<Hospital> findBySpeciality(String speciality);
     List<Hospital> findByAvailableBedsAndBySpecialities(String speciality);
 }

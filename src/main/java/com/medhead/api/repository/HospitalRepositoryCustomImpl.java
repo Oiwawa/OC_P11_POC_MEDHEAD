@@ -23,7 +23,7 @@ public class HospitalRepositoryCustomImpl implements HospitalRepositoryCustom {
     }
 
     @Override
-    public List<Hospital> findBySpecialities(String speciality) {
+    public List<Hospital> findBySpeciality(String speciality) {
         TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.speciality LIKE :speciality", Hospital.class);
         query.setParameter("speciality", "%" + speciality + "%");
         return query.getResultList();

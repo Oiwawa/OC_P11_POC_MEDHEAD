@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -50,6 +52,27 @@ public class HospitalController {
         return new ResponseEntity<>(specialities, HttpStatus.OK);
     }
 
+    @GetMapping("/speciality/{speciality}")
+    public Iterable<Hospital> getAllBySpeciality(@PathVariable("speciality") final String speciality) throws HospitalNotFoundException {
+        ArrayList<Hospital> hospitals = (ArrayList<Hospital>) hospitalService.findBySpeciality(speciality);
+        if (!hospitals.isEmpty()) {
+            return hospitals;
+        } else {
+            throw new HospitalNotFoundException("No hospitals found in the database with speciality " + speciality);
+        }
+    }
+
+    @GetMapping("/available")
+    public Iterable<Hospital> getAllavailableBedsHospitals() throws HospitalNotFoundException {
+        Iterable<Hospital> hospitals = hospitalService.findByAvailableBeds();
+        if (hospitals != null) {
+            return hospitals;
+        } else {
+            throw new HospitalNotFoundException("No hospitals with available beds found in the database");
+        }
+    }
+
+
     @GetMapping("/search")
     public Iterable<Hospital> searchHospitals(
             @RequestParam(value = "speciality", required = false) String speciality,
@@ -66,4 +89,5 @@ public class HospitalController {
             throw new HospitalNotFoundException("No hospitals found with the given parameters");
         }
     }
+
 }
