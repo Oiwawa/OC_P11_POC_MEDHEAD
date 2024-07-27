@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface HospitalRepositoryCustom {
+
+    List<String> findAllSpecialities();
     List<Hospital> findByAvailableBeds();
     List<Hospital> findBySpecialities(String speciality);
     List<Hospital> findByAvailableBedsAndBySpecialities(String speciality);

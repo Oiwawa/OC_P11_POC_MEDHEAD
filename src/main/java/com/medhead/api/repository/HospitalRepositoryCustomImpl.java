@@ -7,6 +7,8 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository
 public class HospitalRepositoryCustomImpl implements HospitalRepositoryCustom {
@@ -32,5 +34,16 @@ public class HospitalRepositoryCustomImpl implements HospitalRepositoryCustom {
         TypedQuery<Hospital> query = entityManager.createQuery("SELECT h FROM Hospital h WHERE h.available_beds > 0 AND h.speciality LIKE :speciality", Hospital.class);
         query.setParameter("speciality", "%" + speciality + "%");
         return query.getResultList();
+    }
+
+    @Override
+    public List<String> findAllSpecialities() {
+        TypedQuery<String> query = entityManager.createQuery("SELECT h.speciality FROM Hospital h", String.class);
+        List<String> specialitiesList = query.getResultList();
+        return specialitiesList.stream()
+                .flatMap(specialities -> Stream.of(specialities.split(",")))
+                .map(String::trim)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

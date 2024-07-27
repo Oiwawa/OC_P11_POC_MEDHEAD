@@ -2,6 +2,7 @@ package com.medhead.api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 @Entity
@@ -18,6 +19,7 @@ public class Hospital {
 
     private float latitude;
 
+    @Getter
     @Column(name="speciality")
     private String speciality;
 
