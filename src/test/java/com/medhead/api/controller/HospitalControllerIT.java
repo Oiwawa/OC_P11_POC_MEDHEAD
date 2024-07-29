@@ -1,6 +1,8 @@
 package com.medhead.api.controller;
 
 import com.medhead.api.model.Hospital;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +19,14 @@ public class HospitalControllerIT {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @BeforeEach
+    void setUp() {
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
 
     @Test
     public void testGetAllHospitals() {

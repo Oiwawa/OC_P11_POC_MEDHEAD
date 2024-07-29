@@ -2,6 +2,8 @@ package com.medhead.api.service;
 
 import com.medhead.api.model.Hospital;
 import com.medhead.api.repository.HospitalRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,6 +24,14 @@ public class HospitalServiceTest {
 
     @InjectMocks
     private HospitalService hospitalService;
+
+    @BeforeEach
+    void setUp() {
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
 
     @Test
     public void testGetAllHospital() {
