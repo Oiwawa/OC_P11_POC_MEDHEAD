@@ -1,0 +1,65 @@
+### Get all hospitals
+GET http://localhost:9090/hospital
+Accept: application/json
+
+###
+
+### Get hospital by ID
+GET http://localhost:9090/hospital/1
+Accept: application/json
+
+###
+
+### Get all specialities
+GET http://localhost:9090/hospital/speciality
+Accept: application/json
+
+###
+
+### Get all hospitals by speciality
+GET http://localhost:9090/hospital/speciality/cardiology
+Accept: application/json
+
+###
+
+### Get all hospitals with available beds
+GET http://localhost:9090/hospital/available
+Accept: application/json
+
+###
+
+### Get all hospitals with available beds by speciality
+GET http://localhost:9090/hospital/available/speciality/cardiology
+Accept: application/json
+
+###
+
+### Search hospitals with different parameters
+# Search by speciality
+GET http://localhost:9090/hospital/search?speciality=cardiology
+Accept: application/json
+
+###
+# Search by available beds
+GET http://localhost:9090/hospital/search?availableBeds=true
+Accept: application/json
+
+###
+# Search by speciality and available beds
+GET http://localhost:9090/hospital/search?speciality=cardiology&availableBeds=true
+Accept: application/json
+
+###
+# Search by location (lat/lng) and distance in England
+GET http://localhost:9090/hospital/search?latInit=51.509865&longInit=-0.118092&distance=100
+Accept: application/json
+
+###
+# Search by location, distance, and speciality in England
+GET http://localhost:9090/hospital/search?latInit=51.509865&longInit=-0.118092&distance=10&speciality=cardiology
+Accept: application/json
+
+###
+# Search by location, distance, speciality, and available beds in England
+GET http://localhost:9090/hospital/search?latInit=51.509865&longInit=-0.118092&distance=100&speciality=cardiology&availableBeds=true
+Accept: application/json

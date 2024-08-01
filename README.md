@@ -41,14 +41,14 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
  - Lancer l'application
  - Lancer le script data.sql
  - Accéder à "http://localhost:9090/h2-console"
- - Première connexion : Tester la connection ([Voir la documentation H2 ](https://www.h2database.com/html/main.html)en cas de problème)
+ - Première connexion : Tester la connection ([Voir la documentation H2 ](https://www.h2database.com/html/main.html) en cas de problème)
  - Se connecter
 
 6. Lancer le front
  - Voir le readme du repository front-end
 
 
-## Documentation Swagger :
+## Documentation :
 - Lancer l'application Java 
 - Accéder à : http://localhost:9090/swagger-ui/index.html
 
