@@ -10,7 +10,7 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
 
 ## Installation
 
-1. Clonez le dépôt du projet :
+1. Cloner le dépôt du projet :
    ```bash
    git clone https://github.com/Oiwawa/OC_P11_POC_MEDHEAD.git
    cd OC_P11_POC_MEDHEAD
@@ -21,7 +21,7 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
    mvn clean install
    ```
 
-   **Si le projet nécessite une configuration spécifique (comme les paramètres de base de données), éditez le fichier application.properties situé dans src/main/resources et ajustez les valeurs selon vos besoins.**
+   **Si le projet nécessite une configuration spécifique (comme les paramètres de base de données), éditez le fichier application.properties situé dans "/src/main/resources" et ajustez les valeurs selon vos besoins.**
 
 
 3. Lancer l'application
@@ -36,10 +36,11 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
    ```bash
    mvn test
    ```
+   ou via les fonctionnalités de lancement tests d'IntelliJ Idea
    
 5. Lancer la base de données h2
  - Lancer l'application
- - Lancer le script data.sql
+ - Lancer le script data.sql qui se trouve dans "/src/resources"
  - Accéder à "http://localhost:9090/h2-console"
  - Première connexion : Tester la connection ([Voir la documentation H2 ](https://www.h2database.com/html/main.html) en cas de problème)
  - Se connecter
@@ -51,8 +52,6 @@ Ce guide vous explique comment configurer et lancer la Proof of Concept d'une AP
 ## Documentation :
 - Lancer l'application Java 
 - Accéder à : http://localhost:9090/swagger-ui/index.html
-
-
 
 
 ## Configuration
