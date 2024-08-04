@@ -41,9 +41,10 @@ public class HospitalRepositoryCustomImpl implements HospitalRepositoryCustom {
         TypedQuery<String> query = entityManager.createQuery("SELECT h.speciality FROM Hospital h", String.class);
         List<String> specialitiesList = query.getResultList();
         return specialitiesList.stream()
-                .flatMap(specialities -> Stream.of(specialities.split(",")))
+                .flatMap(specialities -> Stream.of(specialities.split("/")))
                 .map(String::trim)
                 .distinct()
                 .collect(Collectors.toList());
     }
+
 }
