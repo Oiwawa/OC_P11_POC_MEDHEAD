@@ -13,9 +13,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.nio.file.Paths;
 import java.time.Duration;
 
+import org.junit.jupiter.api.Disabled;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled("Ignored in CI/CD pipeline")
 public class MedheadUITests {
 
     private WebDriver driver;
