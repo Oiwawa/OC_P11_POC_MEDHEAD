@@ -1,6 +1,14 @@
 name: Medhead CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   build:
@@ -21,3 +29,9 @@ jobs:
 
       - name: Run tests
         run: mvn test
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: target/*.jar
